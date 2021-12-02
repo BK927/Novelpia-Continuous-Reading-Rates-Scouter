@@ -1,0 +1,1 @@
+# Novelpia-Continuous-Reading-Rates-Scouter
