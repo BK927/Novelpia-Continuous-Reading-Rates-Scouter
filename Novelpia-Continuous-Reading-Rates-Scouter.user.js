@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         노벨피아 연독률 측정
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0z
 // @description  작가들을 위한 연독율 측정기.
 // @author       BK927
 // @match        https://novelpia.com/novel/*
@@ -12,6 +12,19 @@
 window.addEventListener("load", (event) => {
     const displayBox = document.querySelector("body > div:nth-child(28) > div.mobile_hidden.s_inv > div > div > table > tbody > tr:nth-child(2) > td > div > div:nth-child(1)");
 
+    const addEventToPageBtn = function () {
+        const pageBtn = document.querySelectorAll("#episode_list > div > nav > ul > li");
+        pageBtn.forEach((element) =>
+            element.addEventListener("click", (e) => {
+                setTimeout(() => {
+                    clacViewGap();
+                    addEventToPageBtn();
+                }, 500);
+            })
+        );
+    };
+
+    addEventToPageBtn();
     clacViewGap();
 });
 
