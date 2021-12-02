@@ -1,17 +1,47 @@
 // ==UserScript==
 // @name         노벨피아 연독률 측정
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @version      1.0
+// @description  작가들을 위한 연독율 측정기.
+// @author       BK927
 // @match        https://novelpia.com/novel/*
 // @icon         https://www.google.com/s2/favicons?domain=novelpia.com
 // @grant        none
 // ==/UserScript==
 
-window.addEventListener('load', (event) => {
-//body > div:nth-child(29) > div.am-mainpanel:nth-child(16) > div.s_inv:nth-child(2) > table#episode_list_box:nth-child(2) > tbody > tr:nth-child(3) > td > div#episode_list:nth-child(2) > table:nth-child(1)
-//body > div:nth-child(29) > div.am-mainpanel:nth-child(16) > div.s_inv:nth-child(2) > table#episode_list_box:nth-child(2) > tbody > tr:nth-child(3) > td > div#episode_list:nth-child(2) > table:nth-child(1) > tbody > tr.ep_style5:nth-child(1+2n) > td.font12:nth-child(2) > div.ep_style2:nth-child(3) > font.font11 > span:nth-child(2)
-    
-alert('load');
+window.addEventListener("load", (event) => {
+    const displayBox = document.querySelector("body > div:nth-child(28) > div.mobile_hidden.s_inv > div > div > table > tbody > tr:nth-child(2) > td > div > div:nth-child(1)");
+
+    clacViewGap();
 });
+
+function clacViewGap() {
+    const allEpisodes = document.querySelectorAll("#episode_list > table > tbody > tr");
+    const stats = [];
+
+    allEpisodes.forEach((element, index) => {
+        const node = document.querySelector("#episode_list > table > tbody > tr:nth-child(" + (1 + index * 2).toString() + ") > td.font12 > div > font > span:nth-child(2)");
+        const statDict = extractStat(node);
+        if (index > 0) {
+            const formerView = stats[index - 1]["view"];
+            const numSign = formerView > statDict["view"] ? "-" : "+";
+            const gapPercent = Math.round((Math.abs(formerView - statDict["view"]) / formerView) * 100);
+            node.innerHTML = node.innerHTML + '<span style="font-size:12px;color:#0000FF;">&nbsp; ' + numSign + gapPercent.toString() + "%</span>";
+        }
+        stats.push(statDict);
+    });
+
+    return stats;
+}
+
+function extractStat(element) {
+    const regexp = /[0-9,]+/g;
+    const parsed = element.innerText.match(regexp).map((e) => e.replace(",", ""));
+    //parsed.forEach((e) => console.log(e));
+    const dict = {};
+    dict["length"] = parsed[0];
+    dict["view"] = parsed[1];
+    dict["comment"] = parsed[2];
+    dict["thumup"] = parsed[3];
+    return dict;
+}
