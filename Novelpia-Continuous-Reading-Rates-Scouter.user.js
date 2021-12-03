@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         노벨피아 연독률 측정
 // @namespace    http://tampermonkey.net/
-// @version      1.0z
+// @version      1.2
 // @description  작가들을 위한 연독율 측정기.
 // @author       BK927
 // @match        https://novelpia.com/novel/*
@@ -17,7 +17,7 @@ window.addEventListener("load", (event) => {
         pageBtn.forEach((element) =>
             element.addEventListener("click", (e) => {
                 setTimeout(() => {
-                    clacViewGap();
+                    clacStats();
                     addEventToPageBtn();
                 }, 500);
             })
@@ -25,10 +25,10 @@ window.addEventListener("load", (event) => {
     };
 
     addEventToPageBtn();
-    clacViewGap();
+    clacStats();
 });
 
-function clacViewGap() {
+function clacStats() {
     const allEpisodes = document.querySelectorAll("#episode_list > table > tbody > tr");
     const stats = [];
 
@@ -41,6 +41,8 @@ function clacViewGap() {
             const gapPercent = Math.round((Math.abs(formerView - statDict["view"]) / formerView) * 100);
             node.innerHTML = node.innerHTML + '<span style="font-size:12px;color:#0000FF;">&nbsp; ' + numSign + gapPercent.toString() + "%</span>";
         }
+        const commentRatio = Math.round((statDict["thumup"] / statDict["comment"]) * 100) / 100;
+        node.innerHTML = node.innerHTML + '<span style="font-size:12px;color:#008000;">&nbsp; 댓글 대 좋아요 비율: ' + commentRatio.toString() + "</span>";
         stats.push(statDict);
     });
 
