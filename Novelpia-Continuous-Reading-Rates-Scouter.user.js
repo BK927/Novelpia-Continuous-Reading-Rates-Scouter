@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         노벨피아 연독률 측정
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @description  작가들을 위한 연독율 측정기.
 // @author       BK927
 // @match        https://novelpia.com/novel/*
