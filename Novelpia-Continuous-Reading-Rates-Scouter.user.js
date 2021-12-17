@@ -7,6 +7,7 @@
 // @match        https://novelpia.com/novel/*
 // @icon         https://www.google.com/s2/favicons?domain=novelpia.com
 // @grant        none
+// @license https://creativecommons.org/licenses/by-sa/4.0/
 // ==/UserScript==
 
 window.addEventListener("load", (event) => {
