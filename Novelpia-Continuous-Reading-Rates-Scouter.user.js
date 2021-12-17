@@ -53,8 +53,8 @@ function clacStats() {
         const favoriteRatio = Math.round((epiStatElement["view"] / favorite) * 100);
         node.innerHTML = node.innerHTML + '<span style="font-size:12px;color:#FF0000;">&nbsp; 조회수/선작: ' + favoriteRatio.toString() + "%</span>";
 
-        const notificationRatio = Math.round((epiStatElement["view"] / notification) * 100);
-        node.innerHTML = node.innerHTML + '<span style="font-size:12px;color:#FF0000;">&nbsp; 조회수/알림: ' + notificationRatio.toString() + "%</span>";
+        const notificationRatio = Math.round((notification / epiStatElement["view"]) * 100);
+        node.innerHTML = node.innerHTML + '<span style="font-size:12px;color:#FF0000;">&nbsp; 알림/조회수: ' + notificationRatio.toString() + "%</span>";
 
         epiStats.push(epiStatElement);
     });
