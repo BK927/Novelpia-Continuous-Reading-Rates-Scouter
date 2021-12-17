@@ -7,7 +7,7 @@
 // @match        https://novelpia.com/novel/*
 // @icon         https://www.google.com/s2/favicons?domain=novelpia.com
 // @grant        none
-// @license https://creativecommons.org/licenses/by-sa/4.0/
+// @license CC-BY-SA-3.0; http://creativecommons.org/licenses/by-sa/3.0/
 // @license MIT
 // ==/UserScript==
 
