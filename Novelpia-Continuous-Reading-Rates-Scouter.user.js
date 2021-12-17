@@ -6,6 +6,8 @@
 // @author       BK927
 // @match        https://novelpia.com/novel/*
 // @icon         https://www.google.com/s2/favicons?domain=novelpia.com
+// @updateURL https://github.com/BK927/Novelpia-Continuous-Reading-Rates-Scouter/raw/main/Novelpia-Continuous-Reading-Rates-Scouter.user.js
+// @downloadURL https://github.com/BK927/Novelpia-Continuous-Reading-Rates-Scouter/raw/main/Novelpia-Continuous-Reading-Rates-Scouter.user.js
 // @grant        none
 // @license MIT
 // ==/UserScript==
